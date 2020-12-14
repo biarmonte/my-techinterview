@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  openldap:
+    image: osixia/openldap:1.4.0
+    container_name: my-techinterview
+    hostname: my-techinterview
+    ports: 
+      - "389:389"
+      - "636:636"
+    environment: 
+      - LDAP_ORGANISATION=My Company
+      - LDAP_DOMAIN=techinterview.com
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=123456
+      - LDAP_CONFIG_PASSWORD=123456
+      - "LDAP_BASE_DN=dc=techinterview,dc=com"
+      
+    networks:
+      - openldap
+  
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: phpldapadmin
+    hostname: phpldapadmin
+    ports: 
+      - "80:80"
+    environment: 
+      - PHPLDAPADMIN_LDAP_HOSTS=my-techinterview
+      - PHPLDAPADMIN_HTTPS=false
+    depends_on:
+      - openldap
+    networks:
+      - openldap
+
+networks:
+  openldap:
+    driver: bridge
