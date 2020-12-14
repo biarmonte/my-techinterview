@@ -20,6 +20,8 @@ def create_csv_file():
         writer.writeheader()
 
         #THE VAR 'AUX' ITS AN ARBITRARY NUMBER SET TO HELP US DEFINE AN UID TO EACH USER.
+        #TO CREATE MORE USERS AFTER RUNING THIS SCRIPT ONCE, PLEASE CHANGE THE AUX VALUE SO WE CAN ADD
+        #USERS INTO LDAP SERVER WITHOUT PROBLEM.
         aux=9999
 
         for i in range(USERS):
